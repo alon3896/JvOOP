@@ -1,7 +1,14 @@
 package oop_messages;
 
+
+
+
+/**
+ * Base message class.
+ * Print message to standard IO. 
+ */
 public class Message {
-	protected void print(String message) {
+	public void print(String message) {
 		System.out.print(message +System.lineSeparator());
 	}
 }
