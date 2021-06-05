@@ -18,7 +18,10 @@ public class class_main {
 	public static void main (String[] args) throws IOException
 	{
 		// print text to std io.
-		System.out.println("Hello World!");
+		Message msg = new Message();
+		msg.print("Hello World!");
+		
+		new Message().print("Hello World!");
 		
 		//	Allocate new "What is" question and ask it. 
 		Question what_is = new QuestionWhatIs();

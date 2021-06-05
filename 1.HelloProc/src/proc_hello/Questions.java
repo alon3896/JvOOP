@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 public class Questions {
 	private static void print(String message) {
 		System.out.print(message +System.lineSeparator());
+		return;
 	}
 
 	

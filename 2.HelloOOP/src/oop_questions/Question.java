@@ -11,11 +11,9 @@ import oop_messages.Message;
 
 
 public abstract class Question extends Message {
-	
 	protected BufferedReader reader;
 	public Question() {
 		reader = new BufferedReader( new InputStreamReader( System.in ) );
 	}
-
 	public abstract  String ask(String question) throws IOException ;
 }

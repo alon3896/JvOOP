@@ -1,14 +1,31 @@
 package math;
 
-//import math.Expression.CHAR_TYPE;
 
-public class Parser {
+
+
+/**
+ * 
+ * Mathematical expression parsing methods. 
+ *
+ */
+public class ExpParser {
+	/***********************************************************\
+	*					Exception strings						*
+	\***********************************************************/
+	public final static String EXP_ILLEGAL_DIGIT = "Illigal after digt";
+	public final static String EXP_ILLEGAL_CHAR = "illigal character after operator";
+	public final static String EXP_CHAR_ERROR = "Character error";
+	public final static String EXP_UNKNOW_CHAR = "Unknown character";
 	
-	public enum CHAR_TYPE {
-	    DIGIT, OPER, SPACE, UNKNOWN
-	}
 	
+	
+	
+	
+	/***********************************************************\
+	*						Operators members					*
+	\***********************************************************/
 	private static final char[] OPERATORS = {'+','-','*','/'};
+
 	
 	public static boolean isSigne(char chr) {
 		return ((chr == '-') || (chr == '+'));
@@ -35,6 +52,21 @@ public class Parser {
 	}
 	
 	
+	
+	
+	
+	/***********************************************************\
+	*					Expression string						*
+	\***********************************************************/
+	public enum CHAR_TYPE {
+	    DIGIT, OPER, SPACE, UNKNOWN
+	}
+
+	/**
+	 * Get expression character type.
+	 * @param chr - expression character.
+	 * @return character type.
+	 */
 	private static CHAR_TYPE getType(char chr)	{
 		CHAR_TYPE chr_type = CHAR_TYPE.UNKNOWN;
 		if(isNum(chr)) {
@@ -49,7 +81,12 @@ public class Parser {
 	}
 	
 	
-	//private CHAR_TYPE curr_type = CHAR_TYPE.UNKNOWN;
+	/**
+	 * Get the expression without spaces after checking correctness. 
+	 * @param expression - mathematical expression.
+	 * @return expression string.
+	 * @throws Exception
+	 */
 	public String getExpression(char[] expression) throws Exception {
 		String expr_str = "";
 		CHAR_TYPE last_type = CHAR_TYPE.UNKNOWN;
@@ -71,7 +108,7 @@ public class Parser {
 					} else if(isSpace(chr)) {
 						last_type = getType(chr);
 					} else {
-						throw new Exception("Illigal after digt");
+						throw new Exception(EXP_ILLEGAL_DIGIT);
 					}
 				}	break;
 				
@@ -83,7 +120,7 @@ public class Parser {
 					} else if(isSpace(chr)) {
 						next_type = CHAR_TYPE.DIGIT;
 					} else {
-						throw new Exception("illigal character after operator");
+						throw new Exception(EXP_ILLEGAL_CHAR);
 					}
 				}	break;
 					
@@ -96,16 +133,16 @@ public class Parser {
 						} else if(CHAR_TYPE.OPER == next_type) {
 							next_type = CHAR_TYPE.DIGIT; 
 						} else {
-							throw new Exception("Character error");
+							throw new Exception(EXP_CHAR_ERROR);
 						}
 					}
 					else if(!isSpace(chr)){
-						throw new Exception("Character error");
+						throw new Exception(EXP_CHAR_ERROR);
 					}
 				}	break;
 				
 				default:{
-					throw new Exception("Unknown character");
+					throw new Exception(EXP_UNKNOW_CHAR);
 				}
 			}
 		}
